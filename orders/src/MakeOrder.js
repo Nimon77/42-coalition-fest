@@ -20,7 +20,7 @@ const boissons = []
 	}
 
 const validation = Yup.object().shape({
-	table: Yup.string().notOneOf(["0"]).required(),
+	table: Yup.string().notOneOf(["0"]).required('Select table'),
 })
 
 function send(values) {

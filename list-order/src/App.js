@@ -38,8 +38,8 @@ function finish_order(id) {
 	});
 }
 
-function color(finish, value) {
-	if (finish === 1 || value === "0")
+function color(finish) {
+	if (finish === 1)
 		return 'success';
 	return 'secondary';
 }
@@ -59,35 +59,45 @@ function get_rows() {
 		if (err) { return console.log(err); }
 		var rows = result.docs.map((order) => (
 			<tr id={order._id} class={is_finish(order)}>
-				<th width="10%">{order.table}</th>
+				<th width="5%">{order.table}</th>
 				<td>
-					<Button value="beer[0].demi" variant={color(order.beer[0].demi.finish, order.beer[0].demi.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+					<Button value="beer[0].demi" variant={color(order.beer[0].demi.finish)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.beer[0].demi.value}
 					</Button>
 				</td>
 				<td>
-					<Button value="beer[0].litron" variant={color(order.beer[0].litron.finish, order.beer[0].litron.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+					<Button value="beer[0].litron" variant={color(order.beer[0].litron.finish)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.beer[0].litron.value}
 					</Button>
 				</td>
 				<td>
-					<Button value="beer[1].demi" variant={color(order.beer[1].demi.finish, order.beer[1].demi.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+					<Button value="beer[1].demi" variant={color(order.beer[1].demi.finish)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.beer[1].demi.value}
 					</Button>
 				</td>
 				<td>
-					<Button value="beer[1].litron" variant={color(order.beer[1].litron.finish, order.beer[1].litron.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+					<Button value="beer[1].litron" variant={color(order.beer[1].litron.finish)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.beer[1].litron.value}
 					</Button>
 				</td>
 				<td>
-					<Button value="beer[2].demi" variant={color(order.beer[2].demi.finish, order.beer[2].demi.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+					<Button value="beer[2].demi" variant={color(order.beer[2].demi.finish)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.beer[2].demi.value}
 					</Button>
 				</td>
 				<td>
 					<Button value="beer[2].litron" variant={color(order.beer[2].litron.finish, order.beer[2].litron.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.beer[2].litron.value}
+					</Button>
+				</td>
+				<td>
+					<Button value="coca" variant={color(order.coca.finish, order.beer[2].litron.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+						{order.coca.value}
+					</Button>
+				</td>
+				<td>
+					<Button value="orangina" variant={color(order.orangina.finish, order.beer[2].litron.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+						{order.orangina.value}
 					</Button>
 				</td>
 				<td width="7%">
@@ -134,10 +144,11 @@ function App() {
 						<th colSpan="2">Hefeweizen</th>
 						<th colSpan="2">Blanche</th>
 						<th colSpan="2">Buchesse</th>
+						<th colSpan="2"></th>
 						<th rowSpan="2"></th>
 					</tr>
 					<tr>
-						<th>0.5L</th><th>1L</th><th>0.5L</th><th>1L</th><th>0.5L</th><th>1L</th>
+						<th>0.5L</th><th>1L</th><th>0.5L</th><th>1L</th><th>0.5L</th><th>1L</th><th width="10%">Coca</th><th width="10%">Orangina</th>
 					</tr>
 				</thead>
 				<tbody id='rows'>

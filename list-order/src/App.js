@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table, Button } from 'react-bootstrap';
-import './ListOrders.css';
+import './App.css';
 import { remoteOrdersDb, localOrdersDb } from './const.js';
 
 function finish(cell, id) {
@@ -123,7 +123,7 @@ localOrdersDb.sync(remoteOrdersDb, {
 
 //TODO: check when connection lost
 
-function ListOrders() {
+function App() {
 	return (
 		<div className="App">
 		<ul>
@@ -149,4 +149,4 @@ function ListOrders() {
 	);
 }
 
-export default ListOrders;
+export default App;

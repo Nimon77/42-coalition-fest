@@ -1,9 +1,11 @@
 import React from 'react';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button, Col } from 'react-bootstrap';
 import { Formik } from 'formik'
 import * as Yup from 'yup';
 import { remoteOrdersDb } from './const.js';
+
 
 const tables = []
 	for (var i = 1; i <= 24; i++) {
@@ -213,12 +215,12 @@ function FormDrink () {
   );
 }
 
-function MakeOrder() {
+function App() {
 	return (
 		<div className="App">
 			{FormDrink()}
 		</div>
 	);
-};
+}
 
-export default MakeOrder;
+export default App;

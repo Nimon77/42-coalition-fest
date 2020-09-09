@@ -3,10 +3,9 @@ import ReactDOM from 'react-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form, Button, Col } from 'react-bootstrap';
-import { Formik } from 'formik'
+import { Formik, ErrorMessage } from 'formik'
 import * as Yup from 'yup';
 import { remoteOrdersDb } from './const.js';
-
 
 const tables = []
 	for (var i = 1; i <= 24; i++) {
@@ -22,10 +21,6 @@ const boissons = []
 		)
 	}
 
-const validation = Yup.object().shape({
-	table: Yup.string().notOneOf(["0"]).required(),
-})
-
 function send(values) {
 	values.beer[0].demi.finish = values.beer[0].demi.value === "0" ? 1 : 0 ;
 	values.beer[0].litron.finish = values.beer[0].litron.value === "0" ? 1 : 0 ;
@@ -37,7 +32,8 @@ function send(values) {
 	values.orangina.finish = values.orangina.value === "0" ? 1 : 0;
 	remoteOrdersDb.post(values, function(err, response) {
 		if (err) { return console.log(err); }
-		console.log(err);
+		console.log(response);
+		change_table(values.table);
 	  });
 	return ;
 }
@@ -64,14 +60,14 @@ function change_table (value) {
 				</tr>
 			))
 			table = (
-				<table>
+				<table class="table table-white table-striped table-bordered table-sm">
 					<thead>
+						<tr><th colSpan="8">Commande en cours :</th></tr>
 						<tr>
 							<th colSpan="2">Hefeweizen</th>
 							<th colSpan="2">Blanche</th>
 							<th colSpan="2">Buchesse</th>
 							<th colSpan="2"></th>
-							<th rowSpan="2"></th>
 						</tr>
 						<tr>
 							<th>0.5L</th><th>1L</th><th>0.5L</th><th>1L</th><th>0.5L</th><th>1L</th><th width="10%">Coca</th><th width="10%">Orangina</th>
@@ -86,6 +82,10 @@ function change_table (value) {
 		ReactDOM.render(table, document.getElementById('en_cours'));
 	})
 }
+
+const validation = Yup.object().shape({
+	table: Yup.string().notOneOf(["0"], 'Merci de selectionner une table').required('Required'),
+})
 
 function FormDrink () {
 	return (
@@ -152,10 +152,12 @@ function FormDrink () {
 					name="table"
 					onChange={(e) => {handleChange("table")(e); change_table(e.currentTarget.value);}}
 					isValid={touched.table && !errors.table}
+					isInvalid={errors.table}
 				>
-					<option value="0">Selectionner une table</option>
+					<option value="0" selected>Selectionner une table</option>
 					{tables}
 				</Form.Control>
+				<ErrorMessage name='table' render={(msg) => <p class="text-danger">{msg}</p>}/>
 				<div id="en_cours"></div>
 			</Form.Group>
 			<br></br>

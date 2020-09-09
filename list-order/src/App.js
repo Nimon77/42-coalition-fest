@@ -19,6 +19,10 @@ function finish(cell, id) {
 			order.beer[2].demi.finish = order.beer[2].demi.finish === 0 ? 1 : 0;
 		else if (cell === "beer[2].litron")
 			order.beer[2].litron.finish = order.beer[2].litron.finish === 0 ? 1 : 0;
+		else if (cell === "coca")
+			order.coca.finish = order.coca.finish === 0 ? 1 : 0;
+		else if (cell === "orangina")
+			order.orangina.finish = order.orangina.finish === 0 ? 1 : 0;
 		return order;
 	}).then(function (res) {
 		get_rows();
@@ -45,7 +49,15 @@ function color(finish) {
 }
 
 function is_finish(order) {
-	if (order.beer[0].demi.finish && order.beer[1].demi.finish && order.beer[2].demi.finish && order.beer[0].litron.finish && order.beer[1].litron.finish && order.beer[2].litron.finish)
+	if (order.beer[0].demi.finish &&
+		order.beer[1].demi.finish &&
+		order.beer[2].demi.finish &&
+		order.beer[0].litron.finish &&
+		order.beer[1].litron.finish &&
+		order.beer[2].litron.finish &&
+		order.coca.finish &&
+		order.orangina.finish
+	)
 		return "bg-warning";
 	return ;
 }
@@ -86,17 +98,17 @@ function get_rows() {
 					</Button>
 				</td>
 				<td>
-					<Button value="beer[2].litron" variant={color(order.beer[2].litron.finish, order.beer[2].litron.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+					<Button value="beer[2].litron" variant={color(order.beer[2].litron.finish)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.beer[2].litron.value}
 					</Button>
 				</td>
 				<td>
-					<Button value="coca" variant={color(order.coca.finish, order.beer[2].litron.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+					<Button value="coca" variant={color(order.coca.finish)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.coca.value}
 					</Button>
 				</td>
 				<td>
-					<Button value="orangina" variant={color(order.orangina.finish, order.beer[2].litron.value)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
+					<Button value="orangina" variant={color(order.orangina.finish)} size="lg" block onClick={event => finish(event.target.value, order._id)}>
 						{order.orangina.value}
 					</Button>
 				</td>

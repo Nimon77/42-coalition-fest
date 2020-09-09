@@ -70,7 +70,14 @@ function change_table (value) {
 							<th colSpan="2"></th>
 						</tr>
 						<tr>
-							<th>0.5L</th><th>1L</th><th>0.5L</th><th>1L</th><th>0.5L</th><th>1L</th><th width="10%">Coca</th><th width="10%">Orangina</th>
+							<th width="12%">0.5L</th>
+							<th width="12%">1L</th>
+							<th width="12%">0.5L</th>
+							<th width="12%">1L</th>
+							<th width="12%">0.5L</th>
+							<th width="12%">1L</th>
+							<th width="12%">Coca</th>
+							<th width="12%">Orangina</th>
 						</tr>
 					</thead>
 					<tbody>
